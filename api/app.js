@@ -3,12 +3,22 @@
 // load modules
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const routes = require('./routes');
 
 const { sequelize } = require('./models');
 
-const app = express(); 
+const app = express();
+
 app.use(express.json());
+
+//use cors middleware 
+app.use(cors( 
+  {
+    origins: 'http://localhost:5173',
+    methods: "GET, PUT, POST, DELETE"
+  }
+));
 
 //access to routes.js
 app.use('/api', routes);
