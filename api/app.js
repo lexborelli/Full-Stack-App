@@ -10,10 +10,20 @@ const { sequelize } = require('./models');
 
 const app = express();
 
+// variable to enable global error logging
+const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
 app.use(express.json());
 
 
-
+//use cors middleware 
+app.use(cors( 
+  {
+    origin: 'http://localhost:5173',
+    methods: 'GET, PUT, POST, DELETE',
+    credentials: true, 
+    optionsSuccessStatus: 200
+  }
+));
 //access to routes.js
 app.use('/api', routes);
 
@@ -29,19 +39,6 @@ app.use('/api', routes);
     console.error('Unable to connect to the database:', error);
   }
 }) ();
-
-//use cors middleware 
-app.use(cors( 
-  {
-    origin: 'http://localhost:5173',
-    methods: 'GET, PUT, POST, DELETE',
-    credentials: true
-  }
-));
-
-// variable to enable global error logging
-const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
-
 
 
 // setup morgan which gives us http request logging

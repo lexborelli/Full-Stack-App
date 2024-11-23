@@ -4,22 +4,25 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Courses = () => {
-    const [courses, setCourses] = useState([]); 
+    const [courses, setCourses] = useState([]);
 
     //imported axios to fetch courses data from api
     useEffect(() => {
-    axios.get("http://localhost:5000/api/courses")
-    .then(response => {
-        //handle success
-        setCourses(response.data);
-    })
-    .catch(error => {
-        //handle error
-        console.log("Error fetching and parsing data",error);
-    })
+        const fetchCourses = async () => {
+            try {
+              const response = await axios.get('http://localhost:5000/api/courses');  
+              //handle success
+              setCourses(response.data);
+            } catch (error){
+                //handle error
+                console.log("Error fetching and parsing data",error);
+            }
+        };
+        fetchCourses(); 
     }, []);
 
     return (
+       
         <main>
             <div className="wrap main--grid">
                { courses.map(course => (
