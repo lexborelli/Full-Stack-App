@@ -2,8 +2,8 @@
 
 // load modules
 const express = require('express');
-const morgan = require('morgan');
 const cors = require('cors');
+const morgan = require('morgan');
 const routes = require('./routes');
 
 const { sequelize } = require('./models');
@@ -12,13 +12,7 @@ const app = express();
 
 app.use(express.json());
 
-//use cors middleware 
-app.use(cors( 
-  {
-    origins: 'http://localhost:5173',
-    methods: "GET, PUT, POST, DELETE"
-  }
-));
+
 
 //access to routes.js
 app.use('/api', routes);
@@ -35,6 +29,15 @@ app.use('/api', routes);
     console.error('Unable to connect to the database:', error);
   }
 }) ();
+
+//use cors middleware 
+app.use(cors( 
+  {
+    origin: 'http://localhost:5173',
+    methods: 'GET, PUT, POST, DELETE',
+    credentials: true
+  }
+));
 
 // variable to enable global error logging
 const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
