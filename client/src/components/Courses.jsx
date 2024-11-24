@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Courses = () => {
     const [courses, setCourses] = useState([]);
 
-    //imported axios to fetch courses data from api
+    //Used useEffect() to fecth data with the help of axios which was imported to fetch courses data from api folder, gave axios access to courses endpoint to showcase all courses available 
     useEffect(() => {
         const fetchCourses = async () => {
             try {
@@ -22,9 +22,11 @@ const Courses = () => {
     }, []);
 
     return (
-       
+        //utilized map() method to iterate over the courses array and return each course's id and title. 
+       // rendered a link to the "Create Course" screen at the route "/courses/create"
         <main>
             <div className="wrap main--grid">
+                
                { courses.map(course => (
 
                 <Link key={course.id} className="course--module course--link" to={`courses/${course.id}`}>
@@ -34,7 +36,7 @@ const Courses = () => {
                 
                ))}
 
-                <a className="course--module course--add--module" href="create-course.html">
+                <Link className="course--module course--add--module" to="/courses/create">
                     <span className="course--add--title">
                         <svg
                             version="1.1"
@@ -48,7 +50,7 @@ const Courses = () => {
                         </svg>
                         New Course
                     </span>
-                </a>
+                </Link>
             </div>
         </main>
     )
