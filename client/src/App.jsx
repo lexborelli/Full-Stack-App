@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // imported components
 import Header from "./components/Header";
 import Courses from "./components/Courses"; 
+import CourseDetail from "./components/CourseDetail";
 
 
 function App () {
@@ -12,6 +13,7 @@ function App () {
       <Header />
       <Routes>
         <Route path="/" element={<Courses/>} />
+        <Route path="/courses/:id"  element={<CourseDetail/>}/>
       </Routes>
     </Router>
   );
