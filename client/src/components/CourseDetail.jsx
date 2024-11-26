@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState, useEffect } from "react"; 
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import ReactMarkdown from "react-markdown"; 
 
 const CourseDetail = () => {
     //variables to gold course data, useNavigate() to navigate, used useParams() to return the course id from the url user has clicked on
@@ -53,22 +54,25 @@ const CourseDetail = () => {
                                 <h3 className="course--detail--title">Course</h3>
                                 <h4 className="course--name">{course.title}</h4>
                                 <p>
-                                    By {" "}
+                                    By {" "} 
                                     {course.user 
                                     ? `${course.user.firstName} ${course.user.lastName}`
                                     : "Author Not Found"
                                     }         
                                 </p>
-                                <p>
+                        
+                                <ReactMarkdown>
                                    {course.description}
-                                </p>
+                                </ReactMarkdown>
                             </div>
                             <div>
                                 <h3 className="course--detail--title">Estimated Time</h3>
                                 <p>{course.estimatedTime}</p>
                                 <h3 className="course--detail--title">Materials Needed</h3>
                                 <ul className="course--detail--list">
+                                    <ReactMarkdown>
                                    {course.materialsNeeded}
+                                    </ReactMarkdown>
                                 </ul>
                             </div>
                         </div>
