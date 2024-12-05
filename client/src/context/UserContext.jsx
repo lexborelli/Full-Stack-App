@@ -44,6 +44,7 @@ export const UserProvider = ({ children }) => {
 
     
     // provided signIn function and authUser state to UserContext, data passes to value prop can be accessible to any component in the app. 
+    // {children} is what allows the app component along w/ all of apps children to be passed into UserProvider and render.
 
     return (
         <UserContext.Provider 
